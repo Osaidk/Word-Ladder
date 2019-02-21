@@ -23,15 +23,15 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Scanner kb;	// input Scanner for commands
+		Scanner KeyBoard;	// input Scanner for commands
 		PrintStream ps;	// output file, for student testing and grading only
 		// If arguments are specified, read/write from/to files instead of Std IO.
 		if (args.length != 0) {
-			kb = new Scanner(new File(args[0]));
+			KeyBoard = new Scanner(new File(args[0]));
 			ps = new PrintStream(new File(args[1]));
 			System.setOut(ps);			// redirect output to ps
 		} else {
-			kb = new Scanner(System.in);// default input from Stdin
+			KeyBoard = new Scanner(System.in);// default input from Stdin
 			ps = System.out;			// default output to Stdout
 		}
 		initialize();
