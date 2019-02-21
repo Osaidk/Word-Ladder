@@ -15,6 +15,8 @@
 
 package assignment3;
 import java.util.*;
+
+
 import java.io.*;
 
 public class Main {
@@ -35,6 +37,7 @@ public class Main {
 			ps = System.out;			// default output to Stdout
 		}
 		initialize();
+		parse(KeyBoard);
 		
 		// TODO methods to read in words, output ladder
 	}
@@ -51,8 +54,15 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		// TO DO
-		return null;
+		ArrayList <String> Input = new ArrayList<String>();
+		System.out.println("Enter the Start and End Words:");
+		String input = keyboard.nextLine();
+		String[] parts = input.split(" ", 2);
+		System.out.println(parts[0]);
+		System.out.println(parts[1]);
+		Input.add(parts[0]);
+		Input.add(parts[1]);
+		return Input;
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
@@ -60,7 +70,7 @@ public class Main {
 		// Returned list should be ordered start to end.  Include start and end.
 		// If ladder is empty, return list with just start and end.
 		// TODO some code
-		Set<String> dict = makeDictionary();
+	//	Set<String> dict = makeDictionary();
 		// TODO more code
 		
 		return null; // replace this line later with real return
@@ -69,7 +79,7 @@ public class Main {
     public static ArrayList<String> getWordLadderBFS(String start, String end) {
 		
 		// TODO some code
-		Set<String> dict = makeDictionary();
+	//	Set<String> dict = makeDictionary();
 		// TODO more code
 		
 		return null; // replace this line later with real return
