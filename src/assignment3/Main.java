@@ -58,8 +58,6 @@ public class Main {
 		System.out.println("Enter the Start and End Words:");
 		String input = keyboard.nextLine();
 		String[] parts = input.split(" ", 2);
-		System.out.println(parts[0]);
-		System.out.println(parts[1]);
 		Input.add(parts[0]);
 		Input.add(parts[1]);
 		return Input;
