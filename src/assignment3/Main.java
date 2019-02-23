@@ -56,10 +56,11 @@ public class Main {
 	public static ArrayList<String> parse(Scanner keyboard) {
 		ArrayList <String> Input = new ArrayList<String>();
 		System.out.println("Enter the Start and End Words:");
-		String input = keyboard.nextLine();
-		String[] parts = input.split(" ", 2);
-		Input.add(parts[0]);
-		Input.add(parts[1]);
+		String input = keyboard.next();
+		Input.add(input);
+		input = keyboard.next();
+		Input.add(input);
+		System.out.println(Input.get(0));
 		return Input;
 	}
 	
