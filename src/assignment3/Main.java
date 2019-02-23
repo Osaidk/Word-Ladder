@@ -60,7 +60,6 @@ public class Main {
 		Input.add(input);
 		input = keyboard.next();
 		Input.add(input);
-		System.out.println(Input.get(0));
 		return Input;
 	}
 	
