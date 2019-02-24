@@ -38,7 +38,7 @@ public class Main {
 		}
 		initialize();
 		parse(KeyBoard);
-		printLadder(getWordLadderDFS("money", "goney"));
+		printLadder(getWordLadderDFS("stone", "clone"));
 		
 		// TODO methods to read in words, output ladder
 	}
@@ -78,7 +78,7 @@ public class Main {
 				Ladder.add(end);
 				return Ladder;	
 			}	
-			//Ladder.add(end);
+			Ladder.add(end);
 			DFS_found = false;
 		}
 		
