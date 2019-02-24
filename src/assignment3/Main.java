@@ -38,7 +38,7 @@ public class Main {
 		}
 		initialize();
 		parse(KeyBoard);
-		printLadder(getWordLadderDFS("stone", "clone"));
+		printLadder(getWordLadderDFS("money", "goney"));
 		
 		// TODO methods to read in words, output ladder
 	}
@@ -75,6 +75,8 @@ public class Main {
 			Ladder.add(start);
 			DFS_Helper(Ladder, dict, start, end, new HashSet<String>());
 			if (DFS_found == false) {
+				Ladder.clear();
+				Ladder.add(start);
 				Ladder.add(end);
 				return Ladder;	
 			}	
@@ -103,7 +105,8 @@ public class Main {
 		    		 continue;
 		    	 }
 				//	System.out.println(New_Word);
-		    	 if (New_Word.equals(end)) {
+
+		    	 if (New_Word.equals(end) && dict.contains(New_Word.toUpperCase())) {
 		    		 DFS_found = true;
 		    		 return;
 		    	 }
