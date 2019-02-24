@@ -38,7 +38,7 @@ public class Main {
 		}
 		initialize();
 		parse(KeyBoard);
-		printLadder(getWordLadderDFS("money", "stone"));
+		printLadder(getWordLadderDFS("money", "goney"));
 		
 		// TODO methods to read in words, output ladder
 	}
@@ -75,7 +75,8 @@ public class Main {
 			Ladder.add(start);
 			DFS_Helper(Ladder, dict, start, end, new HashSet<String>());
 			if (DFS_found == false) {
-				return null;	
+				Ladder.add(end);
+				return Ladder;	
 			}	
 			//Ladder.add(end);
 			DFS_found = false;
@@ -103,7 +104,6 @@ public class Main {
 		    	 }
 				//	System.out.println(New_Word);
 		    	 if (New_Word.equals(end)) {
-		    		 ladder.add(New_Word);
 		    		 DFS_found = true;
 		    		 return;
 		    	 }
@@ -113,8 +113,9 @@ public class Main {
 		    	 }
 		     }
 		}
-		//Visited.remove(start);
+		Visited.remove(start);
 	}
+	
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) {
 		
@@ -127,8 +128,8 @@ public class Main {
     
 	
 	public static void printLadder(ArrayList<String> ladder) {
-		if (ladder == null || ladder.size()==0) {
-			System.out.println("No ladder");
+		if (ladder.size()==2) {
+			System.out.println("no word ladder can be found between "+ladder.get(0)+ " and "+ladder.get(1)+".");
 
 		}
 		else {
