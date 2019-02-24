@@ -75,7 +75,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testDFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("hello", "cells");
+		ArrayList<String> res = Main.getWordLadderDFS("coons", "coney");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
@@ -99,7 +99,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testDFS2() {
-		ArrayList<String> res = Main.getWordLadderDFS("aldol", "drawl");
+		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
@@ -109,7 +109,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testPrintLadder() {
-		ArrayList<String> res = Main.getWordLadderBFS("twixt", "hakus");
+		ArrayList<String> res = Main.getWordLadderDFS("stone", "malos");
 		outContent.reset();
 		Main.printLadder(res);
 		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
