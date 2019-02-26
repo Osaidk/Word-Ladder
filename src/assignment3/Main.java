@@ -56,13 +56,17 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		ArrayList <String> Input = new ArrayList<String>();
+		ArrayList <String> tokens = new ArrayList<String>();
 		System.out.println("Enter the Start and End Words:");
 		String input = keyboard.next();
-		Input.add(input);
+		if (input.equals("/quit"))
+		{
+			return tokens;
+		}
+		tokens.add(input);
 		input = keyboard.next();
-		Input.add(input);
-		return Input;
+		tokens.add(input);
+		return tokens;
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
