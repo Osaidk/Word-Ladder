@@ -1,22 +1,20 @@
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
  * Replace <...> with your actual data.
- * <Student1 Name>
+ * Osaid Kadim
  * <Student1 EID>
  * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
+ * Aditya Khanna
+ * ak34642
+ * 16220
  * Slip days used: <0>
- * Git URL:
+ * Git URL: https://github.com/EE422C/project-3-wordladder-pair-57.git
  * Spring 2019
  */
 
 
 package assignment3;
 import java.util.*;
-
-
 import java.io.*;
 
 public class Main {
@@ -56,16 +54,16 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		ArrayList <String> tokens = new ArrayList<String>();
-		System.out.println("Enter the Start and End Words:");
-		String input = keyboard.next();
+		ArrayList <String> tokens = new ArrayList<String>();				//ArrayList for words entered
+		System.out.println("Enter the Start and End Words:");				//Prompts user
+		String input = keyboard.next();										//Stores first input
 		if (input.equals("/quit"))
 		{
-			return tokens;
-		}
-		tokens.add(input);
-		input = keyboard.next();
-		tokens.add(input);
+			return tokens;													//Checks if input is /quits and returns an empty arraylist
+		}	
+		tokens.add(input);													//Adds first input to ArrayList
+		input = keyboard.next();											//Stores second input
+		tokens.add(input);													//Adds second input to ArrayList
 		return tokens;
 	}
 	
