@@ -21,7 +21,7 @@ import java.io.*;
 public class Main {
 	
 	static boolean DFS_found;
-	public static Set<String> dict;
+	public static Set<String> dictionary;
 	public static ArrayList<String> Ladder;
 	public static ArrayList<String> Visited;
 
@@ -48,10 +48,7 @@ public class Main {
 	}
 	
 	public static void initialize() {
-		// initialize your static variables or constants here.
-		// We will call this method before running our JUNIT tests.  So call it 
-		// only once at the start of main.
-		dict = makeDictionary();
+		dictionary = makeDictionary();
 		Visited = new ArrayList<String>();
 		Ladder = new ArrayList<String>();
 	    DFS_found = false;
@@ -111,7 +108,7 @@ public class Main {
 		    	 String New_Word = Word_Mod.toString();
 		    	 if (Visited.contains(New_Word))
 		    		 continue;
-		    	 if (dict.contains(New_Word.toUpperCase())&&!Visited.contains(New_Word)&&!WordSet.contains(New_Word)) {
+		    	 if (dictionary.contains(New_Word.toUpperCase())&&!Visited.contains(New_Word)&&!WordSet.contains(New_Word)) {
 		    		 WordSet.add(New_Word);
 		    		 Visited.add(New_Word);
 		    		 DFS_Helper(New_Word, end, WordSet);
