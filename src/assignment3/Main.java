@@ -93,7 +93,11 @@ public class Main
 			DFS_Helper(start, end, WordSet);
 			if (Ladder.size()==1)
 				Ladder.add(end);
-			return Ladder; 
+			Visited.clear();
+			DFS_found = false;
+			ArrayList<String> ladder = new ArrayList<String>(Ladder);
+			Ladder.clear();
+			return ladder; 
 		}                                                               // If ladder is empty, return list with just start and end.
 	                                                                 	// TODO some code
 	}	                                                                //Set<String> dict = makeDictionary();
