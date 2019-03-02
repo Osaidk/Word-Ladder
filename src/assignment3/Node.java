@@ -1,9 +1,7 @@
 package assignment3;
 
 public class Node 
-{
-	//TEST
-	
+{	
 	private String word;
 	private Node previous;
 	

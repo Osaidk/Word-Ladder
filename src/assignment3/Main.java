@@ -136,7 +136,6 @@ public class Main
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) 
     {
-    	//TEST
     	Set<String> dict = makeDictionary();
     	LinkedList<Node> queue = new LinkedList<Node>();
     	ArrayList<String> ladder = new ArrayList<String>();
