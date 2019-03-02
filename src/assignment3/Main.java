@@ -23,7 +23,7 @@ public class Main {
 	static boolean DFS_found;
 	public static Set<String> dictionary;
 	public static ArrayList<String> Ladder;
-	public static ArrayList<String> Visited;
+	public static HashSet<String> Visited;
 
 	public static void main(String[] args) throws Exception {
 		
@@ -49,8 +49,8 @@ public class Main {
 	
 	public static void initialize() {
 		dictionary = makeDictionary();
-		Visited = new ArrayList<String>();
-		Ladder = new ArrayList<String>();
+		Visited = new HashSet<String>();
+	    Ladder = new ArrayList<String>();
 	    DFS_found = false;
 	}
 	
@@ -91,14 +91,14 @@ public class Main {
 	public static void DFS_Helper (String start, String end, ArrayList<String> WordSet) {
 		if (DFS_found)
 			return;
-		for (int i=0 ; i < start.length() ; i++) {
-			if (start.charAt(i) == end.charAt(i))
+		for (int position=0; position < start.length(); position++) {
+			if (start.charAt(position) == end.charAt(position))
 				continue;
 		     StringBuilder Word_Mod = new StringBuilder(start); 
 		     for (char character ='a'; character<='z'; character++) {
-		    	 if (character == start.charAt(i)) 
+		    	 if (character == start.charAt(position)) 
 		    		 continue;
-		    	 Word_Mod.setCharAt(i, character);
+		    	 Word_Mod.setCharAt(position, character);
 		    	 String New_Word = Word_Mod.toString();
 		    	 if (Visited.contains(New_Word))
 		    		 continue;
@@ -106,10 +106,10 @@ public class Main {
 		    		 WordSet.add(New_Word);
 		    		 Visited.add(New_Word);
 		    		 if (WordSet.get(WordSet.size()-1).equals(end)) {
-		    			DFS_found= true;
+		    			DFS_found = true;
 		    			Ladder = new ArrayList<String>(WordSet);
 		    			return;
-		    			}
+		    		 }
 		    		 DFS_Helper(New_Word, end, WordSet);
 		    		 WordSet.remove(WordSet.size()-1);
 		    	 }
