@@ -43,7 +43,7 @@ public class Main
 			ps = System.out;						// default output to Stdout
 		}
 		initialize();
-		ArrayList<String> userInput = parse(keyboard);		// gets user inputs anf puts them into arraylist
+		ArrayList<String> userInput = parse(keyboard);		// gets user inputs and puts them into arraylist
 		while (userInput.size() != 0) 						// continually prints outputs and prompts user until /quit 
 		{
 			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
@@ -60,7 +60,6 @@ public class Main
 		Visited = new HashSet<String>();
 	    Ladder = new ArrayList<String>();
 	    DFS_found = false;
-	    //BFS_found = false;
 	}
 	
 	/**
