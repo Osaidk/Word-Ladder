@@ -1,4 +1,16 @@
-
+/* WORD LADDER Main.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Osaid Kadim
+ * omk226
+ * 16220
+ * Aditya Khanna
+ * ak34642
+ * 16220
+ * Slip days used: <0>
+ * Git URL: https://github.com/EE422C/project-3-wordladder-pair-57.git
+ * Spring 2019
+ */
 package assignment3;
 
 import static org.junit.Assert.assertEquals;
