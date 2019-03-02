@@ -1,3 +1,4 @@
+
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
  * Replace <...> with your actual data.
