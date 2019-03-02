@@ -20,10 +20,10 @@ import java.io.*;
 public class Main 
 {
 	
-	static boolean DFS_found;
-	public static Set<String> dictionary;
-	public static ArrayList<String> Ladder;
-	public static HashSet<String> Visited;
+	private static boolean DFS_found;
+	private static Set<String> dictionary;
+	private static ArrayList<String> Ladder;
+	private static HashSet<String> Visited;
 
 	public static void main(String[] args) throws Exception 
 	{
@@ -47,12 +47,15 @@ public class Main
 		while (userInput.size() != 0) 						// continually prints outputs and prompts user until /quit 
 		{
 			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			System.out.println();
 			printLadder(getWordLadderBFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			initialize();
 			userInput = parse(keyboard);
 		}
 	}
 	
-	public static void initialize() {
+	public static void initialize() 
+	{
 		dictionary = makeDictionary();
 		Visited = new HashSet<String>();
 	    Ladder = new ArrayList<String>();
@@ -127,40 +130,45 @@ public class Main
 	}
 	
 	
-    public static ArrayList<String> getWordLadderBFS(String start, String end) {
+    public static ArrayList<String> getWordLadderBFS(String start, String end) 
+    {
     	Set<String> dict = makeDictionary();
-    	LinkedList<String> queue = new LinkedList<String>();
-        queue.add(start);
- 
-        dict.add(end);
- 
-        while(!queue.isEmpty()){
-            String word = queue.remove();
- 
-            if(word.equals(end)){
-                //return top.numSteps;
-            }
- 
-            char[] arr = word.toCharArray();
-            for(int i=0; i<arr.length; i++){
-                for(char c='a'; c<='z'; c++){
-                    char temp = arr[i];
-                    if(arr[i]!=c){
-                        arr[i]=c;
-                    }
- 
-                    String newWord = new String(arr);
-                    if(dict.contains(newWord)){
-                        queue.add(newWord);
-                        dict.remove(newWord);
-                    }
- 
-                    arr[i]=temp;
-                }
-            }
+    	LinkedList<Node> queue = new LinkedList<Node>();
+    	ArrayList<String> ladder = new ArrayList<String>();
+    	Node last = new Node(end);
+    	
+    	Node first = new Node(start);
+        queue.add(first);
+        
+        while(!(queue.isEmpty()))
+        {
+        	Node current = queue.poll();
+        	dict.remove(current.getWord());
+        	
+        	if (current.getWord().equals(end))
+        	{
+        		last.setPrevious(current.getPrevious());
+        		break;
+        	}
+        	
+        	for (String next : dict)	
+        	{
+        		if (differsByOne(current.getWord(), next))
+        		{
+        			Node adjacent = new Node(next);
+        			adjacent.setPrevious(current);
+        			queue.add(adjacent);
+        		}
+        	}
         }
- 
-        return new ArrayList<String>();///////////////////////////////////////////////////////
+        
+        while (last.getPrevious() != null)
+        {
+        	ladder.add(last.getWord());
+        	last = last.getPrevious();
+        }
+        
+        return ladder;
 	}
     
 	
@@ -187,7 +195,38 @@ public class Main
 	
 	// TODO
 	// Other private static methods here
-
+	/**
+	 * A method to check if the words are adjacent 
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	private static boolean differsByOne(String first, String second)
+	{
+		int count = 0;									//number of letter differences
+		
+		if (first.equals(second))						//checks if the strings are the same
+		{
+			return false;
+		}
+		for (int i = 0; i < first.length(); i++)		//cycles through every character
+		{
+			if (first.charAt(i) != second.charAt(i))
+			{
+				count++;
+				/*if (count > 1)							//checks if word is not ADJACENT
+				{
+					return false;
+				}*/
+			}
+			if (count > 1)
+			{
+				return false;
+			}
+		}
+		return true;
+		
+	}
 
 	/* Do not modify makeDictionary */
 	public static Set<String>  makeDictionary () {
