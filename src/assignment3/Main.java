@@ -156,7 +156,7 @@ public class Main
         	
         	for (String next : dict)	
         	{
-        		if (differsByOne(current.getWord(), next))
+        		if (differsByOne(current.getWord(), next.toLowerCase()))
         		{
         			Node adjacent = new Node(next);
         			adjacent.setPrevious(current);
@@ -217,14 +217,10 @@ public class Main
 			if (first.charAt(i) != second.charAt(i))
 			{
 				count++;
-				/*if (count > 1)							//checks if word is not ADJACENT
+				if (count > 1)							//checks if word is not ADJACENT
 				{
 					return false;
-				}*/
-			}
-			if (count > 1)
-			{
-				return false;
+				}
 			}
 		}
 		return true;
