@@ -1,9 +1,9 @@
-/* WORD LADDER SampleTest.java
+/* WORD LADDER Main.java
  * EE422C Project 3 submission by
  * Replace <...> with your actual data.
  * Osaid Kadim
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
+ * omk226
+ * 16220
  * Aditya Khanna
  * ak34642
  * 16220
@@ -11,7 +11,6 @@
  * Git URL: https://github.com/EE422C/project-3-wordladder-pair-57.git
  * Spring 2019
  */
-
 package assignment3;
 
 import static org.junit.Assert.assertEquals;
@@ -75,7 +74,7 @@ public class SampleTest {
 	/** Has Word Ladder **/
 	@Test(timeout = 30000)
 	public void testBFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
+		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
 
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
@@ -88,7 +87,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testDFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("coons", "coney");
+		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
