@@ -146,11 +146,12 @@ public class Main
         while(!(queue.isEmpty()))
         {
         	Node current = queue.poll();
-        	dict.remove(current.getWord());
+        	dict.remove(current.getWord().toUpperCase());
         	
         	if (current.getWord().equals(end))
         	{
-        		last.setPrevious(current.getPrevious());
+        		//last.setPrevious(current.getPrevious());
+        		last = current;//////////////////////////////////
         		break;
         	}
         	
@@ -158,7 +159,7 @@ public class Main
         	{
         		if (differsByOne(current.getWord(), next.toLowerCase()))
         		{
-        			Node adjacent = new Node(next);
+        			Node adjacent = new Node(next.toLowerCase());
         			adjacent.setPrevious(current);
         			queue.add(adjacent);
         		}
