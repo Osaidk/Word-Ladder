@@ -62,7 +62,7 @@ public class SampleTest {
 	/** Has Word Ladder **/
 	@Test(timeout = 30000)
 	public void testBFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
+		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
 
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
@@ -75,7 +75,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testDFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("coons", "coney");
+		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
