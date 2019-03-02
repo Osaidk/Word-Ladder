@@ -47,7 +47,7 @@ public class Main
 		while (userInput.size() != 0) 						// continually prints outputs and prompts user until /quit 
 		{
 			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
-			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			printLadder(getWordLadderBFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
 			userInput = parse(keyboard);
 		}
 	}
@@ -175,7 +175,7 @@ public class Main
 		{
 			System.out.println("no word ladder can be found between " + ladder.get(0) + " and " + ladder.get(1) + ".");
 		}
-		else 
+		else if (ladder.size() >= 2)
 		{
 			System.out.println("a " + (ladder.size() - 2) + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
 			for (int i=0; i < ladder.size() ; i++) 
