@@ -35,6 +35,7 @@ public class Main {
 			ps = System.out;			// default output to Stdout
 		}
 		initialize();
+		//////////////////////////////////////////////////////////////////
 		parse(KeyBoard);
 		printLadder(getWordLadderDFS("money", "goney"));
 		
@@ -122,12 +123,46 @@ public class Main {
 	}
 	
 	
-    public static ArrayList<String> getWordLadderBFS(String start, String end) {
+    public static ArrayList<String> getWordLadderBFS(String start, String end) 
+    {
 		
 		// TODO some code
-	//	Set<String> dict = makeDictionary();
+    	Set<String> dict = makeDictionary();
 		// TODO more code
 		
+    	LinkedList<String> queue = new LinkedList<String>();
+        queue.add(start);
+ 
+        dict.add(end);
+ 
+        while(!queue.isEmpty()){
+        	String word = queue.remove();
+ 
+            if(word.equals(end)){
+                //return numSteps;
+            }
+ 
+            char[] arr = word.toCharArray();
+            for(int i=0; i<arr.length; i++){
+                for(char c='a'; c<='z'; c++){
+                    char temp = arr[i];
+                    if(arr[i]!=c){
+                        arr[i]=c;
+                    }
+ 
+                    String newWord = new String(arr);
+                    if(dict.contains(newWord)){
+                        queue.add(newWord);
+                        dict.remove(newWord);
+                    }
+ 
+                    arr[i]=temp;
+                }
+            }
+        }
+ 
+        //return 0;
+    	
 		return null; // replace this line later with real return
 	}
     
