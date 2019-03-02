@@ -17,33 +17,39 @@ import java.util.*;
 import java.io.*;
 
 
-public class Main {
+public class Main 
+{
 	
 	static boolean DFS_found;
 	public static Set<String> dictionary;
 	public static ArrayList<String> Ladder;
 	public static HashSet<String> Visited;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception 
+	{
 		
-		Scanner KeyBoard;	// input Scanner for commands
-		PrintStream ps;	// output file, for student testing and grading only
+		Scanner keyboard;							// input Scanner for commands
+		PrintStream ps;								// output file, for student testing and grading only
 		// If arguments are specified, read/write from/to files instead of Std IO.
-		if (args.length != 0) {
-			KeyBoard = new Scanner(new File(args[0]));
+		if (args.length != 0) 
+		{
+			keyboard = new Scanner(new File(args[0]));
 			ps = new PrintStream(new File(args[1]));
-			System.setOut(ps);			// redirect output to ps
-		} else {
-			KeyBoard = new Scanner(System.in);// default input from Stdin
-			ps = System.out;			// default output to Stdout
+			System.setOut(ps);						// redirect output to ps
+		} 
+		else 
+		{
+			keyboard = new Scanner(System.in);		// default input from Stdin
+			ps = System.out;						// default output to Stdout
 		}
 		initialize();
-		ArrayList<String> User_Input = parse(KeyBoard);
-		if (User_Input.size() != 0) {
-		printLadder(getWordLadderDFS(User_Input.get(0).toLowerCase(), User_Input.get(1).toLowerCase()));
+		ArrayList<String> userInput = parse(keyboard);		// gets user inputs anf puts them into arraylist
+		while (userInput.size() != 0) 						// continually prints outputs and prompts user until /quit 
+		{
+			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			userInput = parse(keyboard);
 		}
-		
-		// TODO methods to read in words, output ladder
 	}
 	
 	public static void initialize() {
@@ -51,6 +57,7 @@ public class Main {
 		Visited = new HashSet<String>();
 	    Ladder = new ArrayList<String>();
 	    DFS_found = false;
+	    //BFS_found = false;
 	}
 	
 	/**
@@ -58,15 +65,18 @@ public class Main {
 	 * @return ArrayList of Strings containing start word and end word. 
 	 * If command is /quit, return empty ArrayList. 
 	 */
-	public static ArrayList<String> parse(Scanner KeyBoard) {
-		ArrayList <String> Tokens = new ArrayList<String>();  // Arraylist for words entered
+	public static ArrayList<String> parse(Scanner keyboard) 
+	{
+		ArrayList <String> tokens = new ArrayList<String>();  		// Arraylist for words entered
 		System.out.println("Enter the Start and End Words:");
-		String Input = KeyBoard.next();    // stores first input
-		if (Input.equals("/quit"))   // user prompt
-			return Tokens;    // returns empty arraylist when command /quit is entered
-		Tokens.add(Input);
-		Tokens.add(KeyBoard.next());
-		return Tokens;
+		String Input = keyboard.next();    							// stores first input
+		if (Input.equals("/quit"))   								// user prompt
+		{
+			return tokens;    										// returns empty arraylist when command /quit is entered
+		}
+		tokens.add(Input);
+		tokens.add(keyboard.next());
+		return tokens;
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
@@ -154,21 +164,27 @@ public class Main {
 	}
     
 	
-	public static void printLadder(ArrayList<String> ladder) {
-		if (ladder == null) {
+	public static void printLadder(ArrayList<String> ladder) 
+	{
+		if (ladder == null) 
+		{
 			System.out.println("Input is invalid");
 			return;
 		}
-		else if (ladder.size()==2) {
-			System.out.println("no word ladder can be found between "+ladder.get(0)+ " and "+ladder.get(1)+".");
+		else if (ladder.size() == 2) 
+		{
+			System.out.println("no word ladder can be found between " + ladder.get(0) + " and " + ladder.get(1) + ".");
 		}
-		else {
-			System.out.println("a " +(ladder.size()-2)+"-rung word ladder exists between smart and money.");
-			for (int i=0; i < ladder.size() ; i++) {
-			System.out.println(ladder.get(i));
+		else 
+		{
+			System.out.println("a " + (ladder.size() - 2) + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
+			for (int i=0; i < ladder.size() ; i++) 
+			{
+				System.out.println(ladder.get(i));
 			}
 		}
 	}
+	
 	// TODO
 	// Other private static methods here
 
