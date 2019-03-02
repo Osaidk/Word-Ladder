@@ -49,6 +49,7 @@ public class Main
 			printLadder(getWordLadderDFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
 			System.out.println();
 			printLadder(getWordLadderBFS(userInput.get(0).toLowerCase(), userInput.get(1).toLowerCase()));
+			System.out.println();
 			initialize();
 			userInput = parse(keyboard);
 		}
@@ -150,8 +151,7 @@ public class Main
         	
         	if (current.getWord().equals(end))
         	{
-        		//last.setPrevious(current.getPrevious());
-        		last = current;//////////////////////////////////
+        		last.setPrevious(current.getPrevious());
         		break;
         	}
         	
