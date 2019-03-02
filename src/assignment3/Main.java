@@ -164,7 +164,7 @@ public class Main
         
         while (last.getPrevious() != null)
         {
-        	ladder.add(last.getWord());
+        	ladder.add(0, last.getWord());
         	last = last.getPrevious();
         }
         
