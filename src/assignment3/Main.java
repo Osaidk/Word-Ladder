@@ -91,12 +91,6 @@ public class Main {
 	public static void DFS_Helper (String start, String end, ArrayList<String> WordSet) {
 		if (DFS_found)
 			return;
-		if (WordSet.get(WordSet.size() - 1).equals(end)) {
-			DFS_found= true;
-			Ladder = new ArrayList<String>(WordSet);
-			return;
-		}
-		
 		for (int i=0 ; i < start.length() ; i++) {
 			if (start.charAt(i) == end.charAt(i))
 				continue;
@@ -111,6 +105,11 @@ public class Main {
 		    	 if (dictionary.contains(New_Word.toUpperCase())&&!Visited.contains(New_Word)&&!WordSet.contains(New_Word)) {
 		    		 WordSet.add(New_Word);
 		    		 Visited.add(New_Word);
+		    		 if (WordSet.get(WordSet.size()-1).equals(end)) {
+		    			DFS_found= true;
+		    			Ladder = new ArrayList<String>(WordSet);
+		    			return;
+		    			}
 		    		 DFS_Helper(New_Word, end, WordSet);
 		    		 WordSet.remove(WordSet.size()-1);
 		    	 }
