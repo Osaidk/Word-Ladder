@@ -139,6 +139,7 @@ public class Main
     	Set<String> dict = makeDictionary();
     	LinkedList<Node> queue = new LinkedList<Node>();
     	ArrayList<String> ladder = new ArrayList<String>();
+    	HashSet<String> alreadyVisited = new HashSet<String>();///////////////////////////////////
     	Node last = new Node(end);
     	
     	Node first = new Node(start);
@@ -147,23 +148,46 @@ public class Main
         while(!(queue.isEmpty()))
         {
         	Node current = queue.poll();
+        	//alreadyVisited.add(current.getWord());//////////////////////////////////////
         	dict.remove(current.getWord().toUpperCase());
-        	
         	if (current.getWord().equals(end))
         	{
         		last.setPrevious(current.getPrevious());
         		break;
         	}
         	
-        	for (String next : dict)	
+        	char[] arr = current.getWord().toCharArray();
+            for(int i=0; i<arr.length; i++)
+            {
+                for(char c='a'; c<='z'; c++)
+                {
+                    char temp = arr[i];
+                    if(arr[i] != c)
+                    {
+                        arr[i] = c;
+                    }
+
+                    String newWord = new String(arr);
+                    if(dict.contains(newWord.toUpperCase()))
+                    {
+                        Node adjacent = new Node(newWord);
+                    	queue.add(adjacent);
+                    	adjacent.setPrevious(current);
+                    }
+
+                    arr[i]=temp;
+                }
+            }
+        	
+        	/*for (String next : dict)	
         	{
-        		if (differsByOne(current.getWord(), next.toLowerCase()))
+        		if ((!(alreadyVisited.contains(next.toLowerCase()))) && (differsByOne(current.getWord(), next.toLowerCase())))
         		{
         			Node adjacent = new Node(next.toLowerCase());
         			adjacent.setPrevious(current);
         			queue.add(adjacent);
         		}
-        	}
+        	}*/
         }
         
         while (last.getPrevious() != null)
