@@ -171,6 +171,7 @@ public class Main
         	ladder.add(0, last.getWord());
         	last = last.getPrevious();
         }
+        ladder.add(0, last.getWord());								// accounts for first word
         
         return ladder;
 	}
