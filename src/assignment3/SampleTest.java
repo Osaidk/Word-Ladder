@@ -111,7 +111,7 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testDFS2() {
-		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
+		ArrayList<String> res = Main.getWordLadderDFS("aldol", "drawl");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
