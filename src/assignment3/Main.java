@@ -196,6 +196,10 @@ public class Main
         	last = last.getPrevious();
         }
         ladder.add(0, last.getWord());								// accounts for first word
+        if (ladder.size() == 1)
+        {
+        	ladder.add(0, start);
+        }
         
         return ladder;
 	}
