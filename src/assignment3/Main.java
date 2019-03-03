@@ -1,13 +1,13 @@
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
- * Replace <...> with your actual data.
+ * 
  * Osaid Kadim
  * omk226
  * 16220
  * Aditya Khanna
  * ak34642
  * 16220
- * Slip days used: <0>
+ * Slip days used: 0
  * Git URL: https://github.com/EE422C/project-3-wordladder-pair-57.git
  * Spring 2019
  */
@@ -55,6 +55,9 @@ public class Main
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public static void initialize() 
 	{
 		dictionary = makeDictionary();
@@ -63,14 +66,14 @@ public class Main
 	    DFS_found = false;
 	}
 	
-	/**
+	/**Parses user inputs and places them into an ArrayList
 	 * @param keyboard Scanner connected to System.in
 	 * @return ArrayList of Strings containing start word and end word. 
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) 
 	{
-		ArrayList <String> tokens = new ArrayList<String>();  		// Arraylist for words entered
+		ArrayList <String> tokens = new ArrayList<String>();  		// arraylist for words entered
 		System.out.println("Enter the Start and End Words:");
 		String Input = keyboard.next();    							// stores first input
 		if (Input.equals("/quit"))   								// user prompt
@@ -82,6 +85,12 @@ public class Main
 		return tokens;
 	}
 	
+	/**BFS search for shortest path between two words
+	 * 
+	 * @param start - String to start BFS with 
+	 * @param end -  String to find with BFS
+	 * @return ArrayList<String> ladder - Returns list of words connecting start and end Strings
+	 */
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
 		if (start == null || end == null || start.length() == 0  
 				|| start.length() != end.length() || start.equals(end))  
@@ -102,8 +111,13 @@ public class Main
 	                                                                 	// TODO some code
 	}	                                                                //Set<String> dict = makeDictionary();
 		                                                                // TODO more code
-			
 	
+	/**DFS helper function for path between two words
+	 * 
+	 * @param start - String to start BFS with 
+	 * @param end -  String to find with BFS
+	 * @param ArrayList<String> WordSet - Returns list of words connecting start and end Strings
+	 */
 	public static void DFS_Helper (String start, String end, ArrayList<String> WordSet) {
 		if (DFS_found)
 			return;
@@ -133,70 +147,61 @@ public class Main
 		}
 	}
 	
-	
+	/**BFS search for shortest path between two words
+	 * 
+	 * @param start - String to start BFS with 
+	 * @param end -  String to find with BFS
+	 * @return ArrayList<String> ladder - Returns list of words connecting start and end Strings
+	 */
     public static ArrayList<String> getWordLadderBFS(String start, String end) 
     {
-    	Set<String> dict = makeDictionary();
-    	LinkedList<Node> queue = new LinkedList<Node>();
-    	ArrayList<String> ladder = new ArrayList<String>();
-    	HashSet<String> alreadyVisited = new HashSet<String>();///////////////////////////////////
-    	Node last = new Node(end);
+    	Set<String> dict = makeDictionary();					// creates dictionary set
+    	LinkedList<Node> queue = new LinkedList<Node>();		// queue for BFS
+    	ArrayList<String> ladder = new ArrayList<String>();		// ladder of words to be returned
+    	Node last = new Node(end);								// last node to backtrack for ladder
     	
-    	Node first = new Node(start);
+    	Node first = new Node(start);							// starting word is put in queue
         queue.add(first);
         
-        while(!(queue.isEmpty()))
+        while(!(queue.isEmpty()))								// loops while queue has elements
         {
-        	Node current = queue.poll();
-        	//alreadyVisited.add(current.getWord());//////////////////////////////////////
-        	dict.remove(current.getWord().toUpperCase());
-        	if (current.getWord().equals(end))
+        	Node current = queue.poll();						// remove first node in queue
+        	dict.remove(current.getWord().toUpperCase());		// remove word from dictionary (VISITED)
+        	if (current.getWord().equals(end))					// base case - checks if end word is found
         	{
-        		last.setPrevious(current.getPrevious());
-        		break;
+        		last.setPrevious(current.getPrevious());		// last node has previous node of current
+        		break;											// exit BFS
         	}
         	
-        	char[] arr = current.getWord().toCharArray();
-            for(int i=0; i<arr.length; i++)
+        	char[] wordArray = current.getWord().toCharArray();		// creates char array of current word
+            
+        	for(int i = 0; i < wordArray.length; i++)			// cycles through every character in word
             {
-                for(char c='a'; c<='z'; c++)
+                for(char c = 'a'; c <= 'z'; c++)				// cycles through every letter
                 {
-                    char temp = arr[i];
-                    if(arr[i] != c)
+                    char originalLetter = wordArray[i];			// stores original letter
+                    wordArray[i] = c;							// changes letter to new letter
+                    String adjacentWord = new String(wordArray);	// converts array to new adjacent word
+                    
+                    if(dict.contains(adjacentWord.toUpperCase()))	// checks if dictionary contains adjacent word
                     {
-                        arr[i] = c;
+                        Node adjacent = new Node(adjacentWord);	// creates node for adjacent word
+                    	adjacent.setPrevious(current);			// sets previous node to original word
+                    	queue.add(adjacent);					// adds adjacent Node to queue for BFS
                     }
-
-                    String newWord = new String(arr);
-                    if(dict.contains(newWord.toUpperCase()))
-                    {
-                        Node adjacent = new Node(newWord);
-                    	queue.add(adjacent);
-                    	adjacent.setPrevious(current);
-                    }
-
-                    arr[i]=temp;
+                    wordArray[i] = originalLetter;				// reverts array back to original
                 }
             }
-        	
-        	/*for (String next : dict)	
-        	{
-        		if ((!(alreadyVisited.contains(next.toLowerCase()))) && (differsByOne(current.getWord(), next.toLowerCase())))
-        		{
-        			Node adjacent = new Node(next.toLowerCase());
-        			adjacent.setPrevious(current);
-        			queue.add(adjacent);
-        		}
-        	}*/
         }
         
-        while (last.getPrevious() != null)
+        while (last.getPrevious() != null)		// goes through every connecting Node from start to end
         {
-        	ladder.add(0, last.getWord());
-        	last = last.getPrevious();
+        	ladder.add(0, last.getWord());		// adds word to front of ladder
+        	last = last.getPrevious();			// Node becomes previous Node
         }
-        ladder.add(0, last.getWord());								// accounts for first word
-        if (ladder.size() == 1)
+        ladder.add(0, last.getWord());			// accounts for adding start word to ladder
+        
+        if (ladder.size() == 1)					// accounts for if there is NO LADDER possible	
         {
         	ladder.add(0, start);
         }
@@ -204,7 +209,10 @@ public class Main
         return ladder;
 	}
     
-	
+	/** Prints whether there is a ladder (and if there is, it prints the words in the ladder) 
+	 * 
+	 * @param ArrayList<String> ladder - list of words connecting start to end words
+	 */
 	public static void printLadder(ArrayList<String> ladder) 
 	{
 		if (ladder == null) 
@@ -224,37 +232,6 @@ public class Main
 				System.out.println(ladder.get(i));
 			}
 		}
-	}
-	
-	// TODO
-	// Other private static methods here
-	/**
-	 * A method to check if the words are adjacent 
-	 * @param first
-	 * @param second
-	 * @return
-	 */
-	private static boolean differsByOne(String first, String second)
-	{
-		int count = 0;									//number of letter differences
-		
-		if (first.equals(second))						//checks if the strings are the same
-		{
-			return false;
-		}
-		for (int i = 0; i < first.length(); i++)		//cycles through every character
-		{
-			if (first.charAt(i) != second.charAt(i))
-			{
-				count++;
-				if (count > 1)							//checks if word is not ADJACENT
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-		
 	}
 
 	/* Do not modify makeDictionary */
