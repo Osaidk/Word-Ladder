@@ -92,7 +92,7 @@ public class Main
 	 * @return ArrayList<String> ladder - Returns list of words connecting start and end Strings
 	 */
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		if (start == null || end == null || start.length() == 0  
+		if (start == null || end == null || start.length() == 0  			// check if DFS is valid to run
 				|| start.length() != end.length() || start.equals(end))  
 			return null;
 		else {
@@ -119,28 +119,28 @@ public class Main
 	 * @param ArrayList<String> WordSet - Returns list of words connecting start and end Strings
 	 */
 	public static void DFS_Helper (String start, String end, ArrayList<String> WordSet) {
-		if (DFS_found)
+		if (DFS_found)													//checks base case of end is found
 			return;
-		for (int position=0; position < start.length(); position++) {
-			if (start.charAt(position) == end.charAt(position))
+		for (int position=0; position < start.length(); position++) {	// cycles through every character in word
+			if (start.charAt(position) == end.charAt(position))			// next character if character at position in start and end is the same
 				continue;
 		     StringBuilder Word_Mod = new StringBuilder(start); 
-		     for (char character ='a'; character<='z'; character++) {
-		    	 if (character == start.charAt(position)) 
+		     for (char character ='a'; character<='z'; character++) {	// cycles through every letter
+		    	 if (character == start.charAt(position)) 				// next character if letter is the same as character in word at the position 
 		    		 continue;
 		    	 Word_Mod.setCharAt(position, character);
 		    	 String New_Word = Word_Mod.toString();
-		    	 if (Visited.contains(New_Word))
+		    	 if (Visited.contains(New_Word))						// checks if word was already visited
 		    		 continue;
 		    	 if (dictionary.contains(New_Word.toUpperCase())&&!Visited.contains(New_Word)&&!WordSet.contains(New_Word)) {
 		    		 WordSet.add(New_Word);
-		    		 Visited.add(New_Word);
+		    		 Visited.add(New_Word);								// marked as visited
 		    		 if (WordSet.get(WordSet.size()-1).equals(end)) {
 		    			DFS_found = true;
 		    			Ladder = new ArrayList<String>(WordSet);
 		    			return;
 		    		 }
-		    		 DFS_Helper(New_Word, end, WordSet);
+		    		 DFS_Helper(New_Word, end, WordSet);				// recursive call for DFS search
 		    		 WordSet.remove(WordSet.size()-1);
 		    	 }
 		     }
