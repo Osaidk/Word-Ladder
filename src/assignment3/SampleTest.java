@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import org.junit.Before;
@@ -121,11 +122,118 @@ public class SampleTest {
 	}
 
 	@Test(timeout = 30000)
-	public void testPrintLadder() {
+	public void testPrintLadder() 
+	{
 		ArrayList<String> res = Main.getWordLadderBFS("twixt", "hakus");
 		outContent.reset();
 		Main.printLadder(res);
 		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
 		assertEquals("no word ladder can be found between twixt and hakus", str);
+	}
+	
+	@Test(timeout = 10000)
+	public void testGivenBFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+		assertTrue(res.size() < 11);
+	}
+	
+	@Test(timeout = 10000)
+	public void testGivenDFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+	}
+	
+	@Test(timeout = 10000)
+	public void testTimeOutBFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("dough", "donut");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(res == null || res.size() == 0 || res.size() == 2);
+	}
+	
+	@Test(timeout = 10000)
+	public void testStackOverflowDFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("dough", "donut");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(res == null || res.size() == 0 || res.size() == 2);
+	}
+	
+	@Test(timeout = 10000)
+	public void testPrintNoLadderBFS() 
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("twixt", "aldol");
+		outContent.reset();
+		Main.printLadder(res);
+		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
+		assertEquals("no word ladder can be found between twixt and aldol", str);
+	}
+	
+	@Test(timeout = 10000)
+	public void testPrintNoLadderDFS() 
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("twixt", "aldol");
+		outContent.reset();
+		Main.printLadder(res);
+		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
+		assertEquals("no word ladder can be found between twixt and aldol", str);
+	}
+	
+	@Test(timeout = 10000)
+	public void testQuit() 
+	{
+		Scanner test = new Scanner(System.in);
+		ArrayList<String> res = Main.parse(test);
+		assertEquals(0, res.size());
+	}
+	
+	@Test(timeout = 10000)
+	public void testNormalBFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("cools", "flame");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+		assertTrue(res.size() < 11);
+	}
+	
+	@Test(timeout = 10000)
+	public void testNormalDFS()
+	{
+		ArrayList<String> res = Main.getWordLadderBFS("cools", "flame");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
 	}
 }
