@@ -75,7 +75,7 @@ public class SampleTest {
 	/** Has Word Ladder **/
 	@Test(timeout = 30000)
 	public void testBFS1() {
-		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
+		ArrayList<String> res = Main.getWordLadderBFS("hello", "cells");
 
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
@@ -83,12 +83,12 @@ public class SampleTest {
 		}
 		assertTrue(verifyLadder(res));
 		assertFalse(res == null || res.size() == 0 || res.size() == 2);
-		assertTrue(res.size() < 11);
+		assertTrue(res.size() < 6);
 	}
 
 	@Test(timeout = 30000)
 	public void testDFS1() {
-		ArrayList<String> res = Main.getWordLadderDFS("stone", "money");
+		ArrayList<String> res = Main.getWordLadderDFS("hello", "cells");
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
 			assertEquals(set.size(), res.size());
@@ -122,10 +122,10 @@ public class SampleTest {
 
 	@Test(timeout = 30000)
 	public void testPrintLadder() {
-		ArrayList<String> res = Main.getWordLadderDFS("money", "goney");
+		ArrayList<String> res = Main.getWordLadderBFS("twixt", "hakus");
 		outContent.reset();
 		Main.printLadder(res);
 		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
-		assertEquals("no word ladder can be found between money and goney", str);
+		assertEquals("no word ladder can be found between twixt and hakus", str);
 	}
 }
